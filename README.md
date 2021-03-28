@@ -1,8 +1,18 @@
 # test_task_DataOx
-Задание https://github.com/sorokousov/test_task_DataOx/blob/main/Python Test Task.pdf
+Задание https://github.com/sorokousov/test_task_DataOx/blob/main/Python%20Test%20Task.pdf
+
+Парсить котировки с сайта можно с помощью простого запроса по URL:
+https://query1.finance.yahoo.com/v7/finance/download/ZOM?period1=0&period2=9999999999&interval=1d&events=history&includeAdjustedClose=true
+
+Но это слишком просто, поэтому я использовал Selenium со всеми шагами со стартовой страницы https://finance.yahoo.com/, что конечно же повлияло на скорость работы парсера. После добавления задачи, в зависимости от мощности железа, нужно немного подождать и проверить готовность соответствующим запросом.
+
+В файле *config.py* можно установить
+- количество потоков для запуска парсера
+- максимальное время в секундах на каждый шаг работы парсера
+- максимальное время в секундах ожидания загрузки файла
+
 
 #Запуск
-
 *git clone https://github.com/sorokousov/test_task_DataOx.git*
 
 *docker-compose up --build*
@@ -30,12 +40,11 @@ Accept: application/json
 ```
 ***Выбрать задачу***
 
-**Request:**
+>**Request:**
 ```
 GET http://localhost:5000/api/tasks/ZOM
-Accept: application/json
 ```
-**Response:**
+>**Response:**
 ```
 {
   "task": {
@@ -53,12 +62,11 @@ Accept: application/json
 ```
 ***Выбрать все задачи***
 
-**Request:**
+>**Request:**
 ```
 GET http://localhost:5000/api/tasks
-Accept: application/json
 ```
-**Response:**
+>**Response:**
 ```
 {
   "tasks": [
@@ -79,12 +87,11 @@ Accept: application/json
 ```
 ***Выбрать котировку***
 
-**Request:**
+>**Request:**
 ```
 GET http://localhost:5000/api/quotes/zom
-Accept: application/json
 ```
-**Response:**
+>**Response:**
 ```
 {
   "zom": [
@@ -112,12 +119,11 @@ Accept: application/json
 ```
 ***Выбрать все котировки***
 
-**Request:**
+>**Request:**
 ```
 GET http://localhost:5000/api/quotes
-Accept: application/json
 ```
-**Response:**
+>**Response:**
 ```
 {
   "quotes": [
