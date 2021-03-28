@@ -21,6 +21,7 @@ def run_parse(task):
     task.started_at = datetime.now()
     task.save()
 
+    # Старт парсера
     fin = YahooFinanceHistory(quote=task.quote.lower())
     fin.run_magic()
 
@@ -37,6 +38,7 @@ def starter():
 
         print('Задание:', ind, '; Активных потоков:', threading.active_count() - 1)
 
+        # Ожидание свободных потоков
         while True:
 
             if threading.active_count() < number_of_threads:
@@ -47,17 +49,16 @@ def starter():
 
 
 if __name__ == '__main__':
-    print('Ожидание прогрузки MySql')
-    time.sleep(5)
-    print('Парсер запущен')
-    print(os.environ['MYSQL_DATABASE'],
-          os.environ['MYSQL_USER'],
-          os.environ['MYSQL_PASSWORD'],
-          os.environ['MYSQL_HOST'])
-    print('--->')
-    db.connect(reuse_if_open=True)
-    create_tables()
-    db.close()
+    # Ожидаем полную загрузку контейнера Mysql
+    while True:
+        try:
+            db.connect(reuse_if_open=True)
+            create_tables()
+            db.close()
+            break
+        except:
+            time.sleep(0.1)
+
+    # Вечный цикл проверки новых задач
     while True:
         starter()
-        time.sleep(5)

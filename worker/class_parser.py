@@ -116,6 +116,8 @@ class YahooFinanceHistory:
                 self.quote_abbr = quote_abbr
                 print(f"{self.quote}: quote_abbr:", self.quote_abbr)
 
+                # Если аббревиатура не равна входной котировке, то останавливаем работу парсера
+                # подняв значение time_out выше лимита
                 if self.quote_abbr.lower() == self.quote.lower():
                     self.time_out = 0
                 else:
@@ -201,11 +203,3 @@ class YahooFinanceHistory:
 
         self.driver.close()
         self.driver.quit()
-
-
-if __name__ == '__main__':
-    wd = os.getcwd()
-    tmp = os.path.join(wd, 'tmp')
-    print(tmp)
-    print(list(os.walk(tmp)))
-    # print(list(os.walk(tmp))[0][2])

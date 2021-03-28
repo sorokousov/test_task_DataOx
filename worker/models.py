@@ -7,11 +7,6 @@ from datetime import datetime
 import peewee as pw
 import os
 
-print(os.environ['MYSQL_DATABASE'],
-      os.environ['MYSQL_USER'],
-      os.environ['MYSQL_PASSWORD'],
-      os.environ['MYSQL_HOST'])
-
 db = pw.MySQLDatabase(database=os.environ['MYSQL_DATABASE'],
                       user=os.environ['MYSQL_USER'],
                       password=os.environ['MYSQL_PASSWORD'],
@@ -51,10 +46,3 @@ def create_tables():
     Task.create_table()
     HistoryQuote.create_table()
 
-
-if __name__ == '__main__':
-    db.connect(reuse_if_open=True)
-    tasks = Task.select().where(not Task.started)
-    for t in tasks:
-        print(t.started)
-    db.close()
