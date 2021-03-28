@@ -1,0 +1,16 @@
+FROM python:3.9
+
+RUN apt-get -y update
+
+ENV MYSQL_HOST=mysql
+ENV MYSQL_DATABASE=yahoo_finance
+ENV MYSQL_USER=yf_parser
+ENV MYSQL_PASSWORD=fox123
+
+EXPOSE 5000
+
+COPY ./worker/ /app
+WORKDIR /app
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+CMD ["python", "run_api.py"]
