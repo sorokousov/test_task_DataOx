@@ -13,6 +13,7 @@ https://query1.finance.yahoo.com/v7/finance/download/ZOM?period1=0&period2=99999
 
 
 #Запуск
+
 *git clone https://github.com/sorokousov/test_task_DataOx.git*
 
 *docker-compose up --build*
