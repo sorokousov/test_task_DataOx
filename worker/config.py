@@ -8,7 +8,7 @@
 number_of_threads = 5
 
 # Лимит секунд на переходы
-time_out_serf = 3
+time_out_serf = 20
 
 # Лимит секунд на докачку файла
-time_out_download = 10
+time_out_download = 20
